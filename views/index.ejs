@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+    <title>Lateb - Carte des bières</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+  
+    <!-- Favicons -->
+    <link href="assets/logo.png" type="image/png" rel="icon">
+    <link href="assets/logo.png" type="image/png" rel="apple-touch-icon">
+    <link href="assets/logo.ico" rel="shortcut icon" />
+  
+    <!-- Main CSS File -->
+    <link href="assets/style.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <header>
+      <h1>Carte des bières</h1>
+    </header>
+    <main class="carte">
+      <% Object.keys(beers).forEach(arrivage => { %>
+        <h3>Arrivage du <%= new Date(arrivage).toLocaleDateString("fr", {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }) %></h3>
+        <% beers[arrivage].forEach(beer => { %>
+          <div class="biere">
+            <% if(beer.badge != null) { %>
+
+            <% } %>
+            <% if(beer.image == null) { %>
+              <img class="icon" src="/assets/beer.png">
+            <% } else { %>
+              <img class="icon" src="data:image/png;base64,<%= beer.image %>" />
+            <% } %>
+            <div class="infos">
+              <h2><%= beer.nom %> - <%= beer.tauxAlcool %>° <span><%= beer.taille %>cl</span></h2>
+              <h3><%= beer.type %> | <%= beer.brasserie %></h3>
+              <p><%= beer.description %></p>
+            </div>
+          </div>
+        <% }) %>
+      <% }) %>
+    </main>
+  </body>
+</html>
